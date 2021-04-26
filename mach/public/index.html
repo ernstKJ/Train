@@ -4,20 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome</title>
+    <title>Welcome to Firebase Hosting</title>
 
     <!-- update the version number as needed -->
-    <script defer src="/__/firebase/8.4.2/firebase-app.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/8.4.2/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-database.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.4.2/firebase-performance.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.4.1/firebase-performance.js"></script>
     <!-- 
       initialize the SDK after all desired features are loaded, set useEmulator to false
       to avoid connecting the SDK to running emulators.
@@ -99,45 +99,56 @@
 
 <body>
     <div id="message">
-        <div style="font-weight:bold; color: #ffa100; background-color: khaki;">
-            Name :
-            <h2 id="Name" style="color: black; font-size: medium;"></h2>
-            Lastname :
-            <h2 id="Lastname" style="color: black; font-size: medium;"></h2>
-            Phone :
-            <h2 id="Phone" style="color: black; font-size: medium;"></h2>
-            Email :
-            <h2 id="Email" style="color: black; font-size: medium;"></h2>
-            Facebook :
-            <h2 id="Facebook" style="color: black; font-size: medium;"></h2>
-            University :
-            <h2 id="University" style="color: black; font-size: medium;"></h2>
-            faculty :
-            <h2 id="Faculty" style="color: black; font-size: medium;"></h2>
+        <h2>Welcome chanok </h2>
+        <h2 id="name"></h2>
+        <br>
+        <h2 id="lastname"></h2>
 
+    </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
-
-
-        </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const loadEl = document.querySelector('#load');
-                firebase.database().ref('/User/').on('value', snapshot => {
-                    console.log(snapshot.child('Name').val());
-                    document.getElementById("Name").innerHTML = snapshot.child('Name').val();
-                    document.getElementById("Lastname").innerHTML = snapshot.child('Lastname').val();
-                    document.getElementById("Phone").innerHTML = snapshot.child('Phone').val();
-                    document.getElementById("Email").innerHTML = snapshot.child('Email').val();
-                    document.getElementById("Facebook").innerHTML = snapshot.child('Facebook').val();
-                    document.getElementById("University").innerHTML = snapshot.child('University').val();
-                    document.getElementById("Faculty").innerHTML = snapshot.child('Faculty').val();
-
-
-                });
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadEl = document.querySelector('#load');
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+            // // The Firebase SDK is initialized and available here!
+            //
+            // firebase.auth().onAuthStateChanged(user => { });
+            firebase.database().ref('/user/').on('value', snapshot => {
+                console.log(snapshot.child('name').val());
+                document.getElementById('name').innerHTML = snapshot.child('name').val();
+                document.getElementById('lastname').innerHTML = snapshot.child('lastname').val();
             });
-        </script>
+            // firebase.firestore().doc('/foo/bar').get().then(() => { });
+            // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+            // firebase.messaging().requestPermission().then(() => { });
+            // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+            // firebase.analytics(); // call to activate
+            // firebase.analytics().logEvent('tutorial_completed');
+            // firebase.performance(); // call to activate
+            //
+            // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+            // try {
+            //     let app = firebase.app();
+            //     let features = [
+            //         'auth',
+            //         'database',
+            //         'firestore',
+            //         'functions',
+            //         'messaging',
+            //         'storage',
+            //         'analytics',
+            //         'remoteConfig',
+            //         'performance',
+            //     ].filter(feature => typeof app[feature] === 'function');
+            //     loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+            // } catch (e) {
+            //     console.error(e);
+            //     loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+            // }
+        });
+    </script>
 </body>
 
 </html>

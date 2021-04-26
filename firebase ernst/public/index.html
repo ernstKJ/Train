@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.4.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.4.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-performance.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style media="screen">
+        body {
+            background: #ECEFF1;
+            color: rgba(0, 0, 0, 0.87);
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #message {
+            background: white;
+            max-width: 360px;
+            margin: 100px auto 16px;
+            padding: 32px 24px;
+            border-radius: 3px;
+        }
+        
+        #message h2 {
+            color: #ffa100;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 0 0 8px;
+        }
+        
+        #message h1 {
+            font-size: 22px;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.6);
+            margin: 0 0 16px;
+        }
+        
+        #message p {
+            line-height: 140%;
+            margin: 16px 0 24px;
+            font-size: 14px;
+        }
+        
+        #message a {
+            display: block;
+            text-align: center;
+            background: #039be5;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            padding: 16px;
+            border-radius: 4px;
+        }
+        
+        #message,
+        #message a {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        
+        #load {
+            color: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 600px) {
+            body,
+            #message {
+                margin-top: 0;
+                background: white;
+                box-shadow: none;
+            }
+            body {
+                border-top: 16px solid #ffa100;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="message">
+        <div style="font-weight:bold; color: #ffa100; background-color: khaki;">
+            Name :
+            <h2 id="Name" style="color: black; font-size: medium;"></h2>
+            Lastname :
+            <h2 id="Lastname" style="color: black; font-size: medium;"></h2>
+            Phone :
+            <h2 id="Phone" style="color: black; font-size: medium;"></h2>
+            Email :
+            <h2 id="Email" style="color: black; font-size: medium;"></h2>
+            Facebook :
+            <h2 id="Facebook" style="color: black; font-size: medium;"></h2>
+            University :
+            <h2 id="University" style="color: black; font-size: medium;"></h2>
+            faculty :
+            <h2 id="Faculty" style="color: black; font-size: medium;"></h2>
+
+
+
+
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const loadEl = document.querySelector('#load');
+                firebase.database().ref('/User/').on('value', snapshot => {
+                    console.log(snapshot.child('Name').val());
+                    document.getElementById("Name").innerHTML = snapshot.child('Name').val();
+                    document.getElementById("Lastname").innerHTML = snapshot.child('Lastname').val();
+                    document.getElementById("Phone").innerHTML = snapshot.child('Phone').val();
+                    document.getElementById("Email").innerHTML = snapshot.child('Email').val();
+                    document.getElementById("Facebook").innerHTML = snapshot.child('Facebook').val();
+                    document.getElementById("University").innerHTML = snapshot.child('University').val();
+                    document.getElementById("Faculty").innerHTML = snapshot.child('Faculty').val();
+
+
+                });
+
+            });
+        </script>
+</body>
+
+</html>
