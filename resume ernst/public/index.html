@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS Template</title>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.4.2/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.4.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.4.2/firebase-performance.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /* Style the header */
+        
+        header {
+            background-color: #666;
+            padding: 30px;
+            text-align: center;
+            font-size: 35px;
+            color: white;
+        }
+        /* Create two columns/boxes that floats next to each other */
+        
+        nav {
+            float: left;
+            width: 30%;
+            height: 100%;
+            /* only for demonstration, should be removed */
+            /*background: rgb(42, 13, 124);*/
+            padding: 20px;
+        }
+        /* Style the list inside the menu */
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        article {
+            float: left;
+            padding: 20px;
+            width: 70%;
+            background-color: white;
+            height: 300px;
+            /* only for demonstration, should be removed */
+        }
+        
+        text {
+            color: black;
+            font-size: medium;
+            margin-left: 5px;
+        }
+        /* Clear floats after the columns */
+        
+        section::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        #load {
+            color: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            font-size: 13px;
+        }
+        /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+        
+        @media (max-width: 600px) {
+            nav,
+            article {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <section>
+        <nav>
+            <div style="background-color:rgb(247, 247, 247); ">
+                <center>
+                    <img src="profile.jpg" width="100%" height="30%"></img>
+                </center>
+            </div>
+            <div style="background-color: wheat;">
+                <text>
+                <h2> PERSONAL DATA</h2>
+                
+                <p>  Name : Jutamas   Jammanee</p>
+                <p>  Age : 23 years old</p>
+                <p>  Date of birth : October 27, 1998</p>
+                <p>  Nationality : Thai</p>
+                <p>  Religion : </p>
+                <p>  Marital Status : Single</p>
+                <p></p>
+                <p></p>
+                <h2>  Contract</h2>
+                <p>  Phone : 062-367-0388</p>
+                <p>  E-mail : jutamasj60@nu.ac.th</p>
+                <p>  Facebook : Ernst  Jutamas</p>
+             </text>
+
+            </div>
+        </nav>
+
+        <article>
+
+            <h2>EDUCATION</h2>
+            <p></p>
+            <h1>Bachelor of Engineering Program in Computer Engineering</h1>
+            <p>Naresuan University</p>
+            <p>GPA 2.50</p>
+
+        </article>
+    </section>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadEl = document.querySelector('#load');
+            firebase.database().ref('/user/').on('value', snapshot => {
+                console.log(snapshot.child('name').val());
+                document.getElementById("Name ").innerHTML = snapshot.child('Name').val();
+                document.getElementById("Age ").innerHTML = snapshot.child('Age').val();
+                document.getElementById("Date of birth ").innerHTML = snapshot.child('Date of birth').val();
+                document.getElementById("Nationality ").innerHTML = snapshot.child('Nationality').val();
+                document.getElementById("Religion ").innerHTML = snapshot.child('Religion').val();
+                document.getElementById("Marital Status ").innerHTML = snapshot.child('Marital Status').val();
+
+                try {
+                    let app = firebase.app();
+                    let features = [
+                        'auth',
+                        'database',
+                        'firestore',
+                        'functions',
+                        'messaging',
+                        'storage',
+                        'analytics',
+                        'remoteConfig',
+                        'performance',
+                    ].filter(feature => typeof app[feature] === 'function');
+                    loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+                } catch (e) {
+                    console.error(e);
+                    loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
